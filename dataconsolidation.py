@@ -1,5 +1,3 @@
-# Ryan comment test test test
-
 import os
 import pandas as pd
 from os import listdir
