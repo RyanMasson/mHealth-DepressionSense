@@ -46,10 +46,12 @@ def addWifiMean(subjectID,df):
     wifiPoints = np.full((days,1),0)
     wifiCounts = np.full((days,1),0)
 
+    # goes through the wifi data frame
     for i in range(len(wifiReport)):
         ts = wifiReport[0][i]
         accessPoints = float(wifiReport[3][i])
 
+        # find the same day within BigFile
         for index,row in df.iterrows():
             day_ts = row['timestamp']
             day = int(row['day']) - 1
