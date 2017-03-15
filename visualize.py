@@ -26,7 +26,13 @@ def getFileNames(path_to_directory):
 
 #inputs are strings
 def isSameDay(timestamp1, timestamp2):
-    return datetime.fromtimestamp(float(timestamp1)).strftime('%Y-%m-%d') == datetime.fromtimestamp(float(timestamp2)).strftime('%Y-%m-%d')
+    if '"' in timestamp1:
+        timestamp1 = timestamp1.replace('"','')
+    if '"' in timestamp2:
+        timestamp2 = timestamp2.replace('"', '')
+    date1 = datetime.utcfromtimestamp(float(timestamp1)).strftime('%Y-%m-%d')
+    date2 = datetime.utcfromtimestamp(float(timestamp2)).strftime('%Y-%m-%d')
+    return date1 == date2
 
 def visualizeTouchCount(subjectID):
     touchFile = '../CS120/' + subjectID + '/tch.csv'
@@ -74,10 +80,7 @@ def visualizeTouchCount(subjectID):
     plt.title(plotName)
 
     plotFileName = "../Visualization/touchCount_V_"+subjectID + ".png"
-   # plt.show()
     plt.savefig(plotFileName,dpi=1000)
-
-#visualizeTouchCount('25349')
 
 def visualizeTouchDelay(subjectID):
     touchFile = '../CS120/' + subjectID + '/tch.csv'
@@ -123,13 +126,8 @@ def visualizeTouchDelay(subjectID):
 
     plotName = "Last Touch Delay Visualization for " + subjectID
     plt.title(plotName)
-
     plotFileName = "../Visualization/touchdelay_V_"+subjectID + ".png"
-
-   # plt.show()
     plt.savefig(plotFileName,dpi=1000)
-
-#visualizeTouchDelay('25349')
 
 def visualizeWifi(subjectID):
     wifiFile = '../CS120/' + subjectID + '/wif.csv'
@@ -175,7 +173,23 @@ def visualizeWifi(subjectID):
 
     plotName = "Wifi Visualization for " + subjectID
     plt.title(plotName)
-
     plotFileName = "../Visualization/wifi_V_"+subjectID + ".png"
    # plt.show()
     plt.savefig(plotFileName,dpi=1000)
+
+def csvToArr(path_to_file):
+    sensor = []
+    label = []
+    data = open(path_to_file).readlines()
+    for row in data:
+        row = [x.rstrip() for x in row.split('\t')]
+        row = row[0].split(',')
+        sensor.append(row[0])
+        label.append(row[1])
+    return pd.DataFrame(csvData)
+
+############ RUN EXAMPLE ####################
+participantID = '25349'
+visualizeTouchCount(participantID)
+visualizeTouchDelay(participantID)
+visualizeWifi(participantID)
