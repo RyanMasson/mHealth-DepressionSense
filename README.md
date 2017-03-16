@@ -4,12 +4,12 @@ Data analysis repository for the feature extraction and clustering of mobile sen
 ## Find out more about [DepressionSense](http://nupurplerobot.weebly.com/) 
 
 ## Repository Code
-Extracting features to create a generalized csv file
+###Extracting features to create a generalized csv file
 * dataconsolidationContinued.py
 * dataconsolidation.py
 * ryan_features_run.py
-The resulting csv file
+###The resulting csv file
 * allFeatures.csv
-Clustering code and results to improve accuracy
+###Clustering code and results to improve accuracy
 * Clustering folder 
 
